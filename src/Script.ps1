@@ -8,11 +8,6 @@
 	)
   [void][reflection.assembly]::LoadWithPartialName("System.Windows.Forms")
   
-  #$file = (get-item 'C:\Users\szafi\Pictures\22712475_1398848403560677_2400551809602002580_o.jpg')
-  ##$file = (get-item "c:\image.jpg")
-
-  #$img = (get-imagesSum -Image1 $file -Image2 $file -operation add)
-  #         sleep -seconds 2
   [System.Windows.Forms.Application]::EnableVisualStyles();
   $form = new-object Windows.Forms.Form
   $form.Text = "Result"
@@ -58,21 +53,21 @@ Function Invoke-Menu {
  
 	Read-Host -Prompt $menuprompt
 } 
-Import-Module "C:\Users\szafi\Documents\Visual Studio 2015\Projects\psModuleImageEdition\psModuleImageEdition\bin\Debug\psModuleImageEdition.dll"
+Import-Module "path\to\your\directory\psModuleImageEdition\bin\Debug\psModuleImageEdition.dll"
 Clear-Variable file* -Scope Global
-$file1 = (get-item 'C:\Users\szafi\Pictures\mononoke1.jpg')
-$file2 = (get-item 'C:\Users\szafi\Pictures\mononoke2.jpg')
+$file1 = (get-item 'path\to\your\first\bitmap')
+$file2 = (get-item 'path\to\your\second\bitmap')
 $menu=@"
-1 Dodaj obrazy
-2 Odejmij obrazy
-3 Pokaz srednia z obrazow
-Q Wyjscie
- 
-Wybierz numer czynnosci lub wpisz Q by wyjsc
+1 Add bitmaps
+2 Show bitmaps difference
+3 Show average from bitmaps
+Q Quit
+
+Type your choice
 "@
 
 Do {
-    Switch (Invoke-Menu -menu $Menu -title "Wybierz co chcesz zrobic" -clear) {
+    Switch (Invoke-Menu -menu $Menu -title "Choose what you want to do" -clear) {
      "1" {
 		 
 		  $img1 = (get-imagesSum -Image1 $file1 -Image2 $file2 -operation add)
@@ -98,7 +93,7 @@ Do {
          }
      Default {Write-Warning "Invalid Choice. Try again."
               sleep -milliseconds 750}
-    } #switch
+    }
 } While ($True)
 
 
